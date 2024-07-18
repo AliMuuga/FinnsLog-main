@@ -1,0 +1,957 @@
+/* Variables Start */
+:root {
+  --font-color: #000000;
+  --background-color : hwb(64 16% 11%);
+  --section-padding : 50px;
+  --main-transition: 0.5s;
+}
+/* Variables End */
+/* Global Rules Start */
+
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Cairo', sans-serif;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Small Screens */
+  @media (min-width:768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  /* Mid Screens */
+  @media (min-width:991px) {
+    .container {
+      width: 970px;
+    }
+  }
+  /* Large Screens */
+  @media (min-width:1199px) {
+    .container {
+      width: 1170px;
+    }
+  }
+/* Global Rules End */
+/* Components Start */
+.main-title {
+  margin: 0 auto 80px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 30px;
+  position: relative;
+  /* Cuz its block it take all width so margin can work */
+  width: fit-content;
+  z-index: 1;
+  transition: var(--main-transition);
+}
+.main-title:hover {
+  color: white;
+  border: 2px solid white;
+  transition-delay: var(--main-transition);
+}
+.main-title::before,
+.main-title::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: var(--font-color);
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%)
+}
+.main-title::before {
+  left: -30px;
+}
+.main-title::after {
+  right: -30px;
+}
+.main-title:hover::before {
+  /* Apply Animation behind the text */
+  z-index: -1;
+  /* Forward to End at the end point and no move */
+  animation: left-move var(--main-transition) linear forwards;
+}
+.main-title:hover::after {
+  /* Apply Animation behind the text */
+  z-index: -1;
+  animation: right-move var(--main-transition) linear forwards;
+}
+@keyframes left-move {
+  /* From 0 to 50% */
+  50% {
+    left: 0;
+    width: 12px;
+    height: 12px;
+  }
+  100% {
+    left: 0;
+    border-radius: 0;
+    width: 50%;
+    height: 100%;
+  }
+}
+@keyframes right-move {
+  50% {
+    right: 0;
+    width: 12px;
+    height: 12px;
+  }
+  100% {
+    right: 0;
+    border-radius: 0;
+    width: 51%;
+    height: 100%;
+  }
+}
+.spikes {
+  position: relative;
+}
+.spikes::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 30px;
+  z-index: 1;
+  background-image: linear-gradient(135deg, white 25%, transparent 25%), linear-gradient(225deg, white 25%, transparent 25%);
+  background-size: 30px 30px;
+}
+.dots {
+  background-image: url(/Imgs/dots.png);
+  height: 186px;
+  width: 204px;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+.dots-up {
+  top: 200px;
+  right: 0;
+}
+.dots-down {
+  bottom: 200px;
+  left: 0;
+}
+/* Components End */
+/* Header Start */
+  .header {
+    /* if you changed ur body color later this color will stay white */
+    background-color: white;
+    box-shadow: 0 0 10px #ddd;
+    /* For The element u will move it and dont want it to get outside the of header */
+    position: relative;
+  }
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* in the resposive li will go down to the logo */
+    flex-wrap: wrap;
+    /* for the mega-menu u want the parent full header or container header only */
+    position: relative;
+  }
+  .header .logo {
+    color: var(--font-color);
+    font-size: 25px;
+    font-weight: bold;
+    /* logo height is the same of the header height so if u change ul size the header will have the same height and not effect*/
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width:768px) {
+    .header .logo {
+      /* To take full width & flex wrap will work to the list */
+      width: 100%;
+      /* if you type above .logo only height wont work so u want to add .header or use max-height */
+      height: 50px;
+    }
+  }
+  .header .main-nav {
+    display: flex;
+  }
+  @media (max-width:768px) {
+    .header .main-nav {
+      margin: auto;
+    }
+  }
+  .header .main-nav > li:hover .mega-menu {
+    opacity: 1;
+    z-index: 100;
+    top: calc(100% + 1px);
+  }
+  /* Direct selector will make u avoid the problem of the mega menu li a in side the main ul */
+  .header .main-nav > li > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Same Height as header For the fill effect*/
+    height: 72px;
+    /* For the fill we will position it */
+    position: relative;
+    color: black;
+    /* We already did height so u dont need padding up and down */
+    padding: 0 30px;
+    transition: var(--main-transition);
+    overflow: hidden;
+  }
+  @media (max-width:768px) {
+    .header .main-nav > li > a  {
+      padding: 10px;
+      font-size: 15px;
+      height: 40px;
+    }
+  }
+  .header .main-nav > li > a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--font-color);
+    top: 0;
+    /* We already did height so u dont need padding up and down */
+    left: -100%;
+    transition: var(--main-transition);
+}
+.header .main-nav > li > a:hover {
+  color: var(--font-color);
+  background-color: #eee;
+}
+.header .main-nav > li > a:hover::before {
+  left: 0;
+}
+.header .mega-menu {
+  /* To make it get outside of the work flow */
+  position: absolute;
+  width: 100%;
+  /* if you want it without padding left and right 15px u will decrease 30px from width and move left to 15px */
+  left: 0px;
+  padding: 30px;
+  background-color: white;
+  border-bottom: 3px solid var(--font-color);
+  z-index: -1;
+  display: flex;
+  gap: 40px;
+  top: calc(100% + 50px);
+  opacity: 0;
+  transition: top var(--main-transition), opacity var(--main-transition) ;
+}
+@media (max-width:768px) {
+  .header .mega-menu {
+    flex-direction: column;
+    gap: 0;
+    padding: 5px;
+  }
+}
+.header .mega-menu .image img {
+  /* To Resize it inside the parent */
+  max-width: 100%;
+}
+@media (max-width:991px) {
+  .header .mega-menu .image {
+    display: none;
+  }
+}
+.header .mega-menu .links {
+  /* to avoid flex wrap on option names when u decrease the width*/
+  min-width: 250px;
+  flex: 1;
+}
+.header .mega-menu .links li {
+  /* For Fill Background */
+  position: relative;
+}
+.header .mega-menu .links li:not(:last-child) {
+  border-bottom: 1px solid #e9e6e6;
+}
+@media (max-width:768px) {
+  .header .mega-menu .links:first-of-type li:last-child {
+    border-bottom: 1px solid #e9e6e6;
+  }
+}
+.header .mega-menu .links li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0px;
+  height: 100%;
+  background-color: #eee;
+  z-index: -1;
+  transition: var(--main-transition);
+}
+.header .mega-menu .links li:hover::before {
+  width: 100%;
+}
+.header .mega-menu .links li a {
+  color: var(--font-color);
+  display: block;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.header .mega-menu .links li a i{
+  margin-right: 10px;
+}
+/* Header End */
+/* Start Landing */
+  .landing {
+    /* For the divider stay in the parent */
+    position: relative;
+  }
+  .landing::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    z-index: -1;
+    transform: skewY(-6deg);
+    transform-origin: left top;
+  }
+  .landing .container {
+    /* 72px is header height */
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    /* To move the items to up alittle */
+    padding-bottom: 120px;
+  }
+  @media (max-width:991px) {
+    .landing .container {
+      flex-direction: column;
+      min-height: calc(20vh - 72px);
+    }
+  }
+  .landing .text {
+    /* to grow as the left width after img*/
+    flex: 1;
+  }
+  @media (max-width:991px) {
+    .landing .text {
+      text-align: center;
+      /* For Animation dont touch the text */
+        margin: 20px auto 50px;
+    }
+  }
+  .landing .text h1 {
+    font-size: 40px;
+    margin: 0;
+    letter-spacing: -2px;
+  }
+  .landing .text p {
+    font-size: 24px;
+    line-height: 1.7;
+    margin: 5px 0 0;
+    color: #333;
+    /* to no get bigger than 500 px */
+    max-width: 500px;
+  }
+  .landing .container .image img {
+    width: 600px;
+    max-width: 100%;
+    /* Animation need the position */
+    position: relative;
+    animation: up-and-down 5s linear infinite;
+  }
+  .landing .go-down {
+    color: var(--font-color);
+    position: absolute;
+    /* Move it alittle up */
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: var(--main-transition);
+  }
+  .landing .go-down:hover {
+    color: crimson;
+  }
+  .landing .go-down i {
+    animation: bouncing 1.5s infinite;
+  }
+  @keyframes up-and-down {
+    0%,100% {
+      top: 0;
+    }
+    50% {
+      top: -50px;
+    }
+  }
+  @keyframes bouncing {
+    0%,10%,20%,50%,80%,100% {
+      transform: translateY(0);
+    }
+    40%,60% {
+      transform: translateY(-10px);
+    }
+  }
+/* End Landing */
+/* Start Creatives*/
+.articles {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  position: relative;
+}
+.articles .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(345px, 1fr));
+  gap: 30px;
+}
+.articles .box {
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 10%);
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform var(--main-transition), box-shadow var(--main-transition);
+  width: 345px; /* Fixed width */
+  height: 700.3px; /* Fixed height */
+}
+.articles .box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 20%);
+}
+.articles .box img {
+  max-width: 100%;
+  width: 345px; /* Fixed width */
+  height: 460px; /* Fixed height */
+  object-fit: cover; /* Ensures the image fits within the dimensions */
+}
+.articles .box .text {
+  padding: 20px;
+  width: 345px; /* Fixed width */
+  height: 191.52px; /* Fixed height */
+  box-sizing: border-box; /* Ensures padding is included in the width and height */
+}
+.articles .box .text h3 {
+  margin: 0;
+}
+.articles .box .text p {
+  margin: 10px 0 0;
+  line-height: 1.5;
+  color: #070707; /* font color */
+}
+.articles .box .info {
+  padding: 30px;
+  border-top: 1px solid #e6e6e7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 345px; /* Fixed width */
+  height: 60px; /* Fixed height */
+  box-sizing: border-box; /* Ensures padding is included in the width and height */
+}
+.articles .box .info a {
+  color: var(--font-color);
+  font-weight: bold;
+}
+.articles .box .info i {
+  color: var(--font-color);
+}
+.articles .box:hover .info i {
+  animation: moving-arrow var(--main-transition) linear infinite;
+}
+@keyframes moving-arrow {
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+/* End Cretives*/
+/* Start Features */
+  .features {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: white;
+    position: relative;
+  }
+  .features .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 30px;
+  }
+  .features .box {
+    text-align: center;
+    border: 1px solid #fffbfb;
+  }
+  .features .box .img-holder {
+    position: relative;
+    overflow: hidden;
+  }
+  .features .box .img-holder::before {
+    content: "";
+    position: absolute;
+    /* For Responsive */
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .features .box .img-holder::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-style: solid;
+    border-width: 0 0 170px 500px ;
+    border-color: transparent transparent #ffffff transparent;
+    transition: var(--main-transition);
+  }
+  .features .box:hover .img-holder::after {
+    border-width: 170px 500px 170px 0;
+  }
+  .features .box .img-holder img {
+    max-width: 100%;
+  }
+  .features .box h2 {
+    position: relative;
+    font-size: 40px;
+    /* To Center it */
+    margin: auto;
+    /* To Make the border at its size not full width */
+    width: fit-content;
+  }
+  .features .box h2::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 15px;
+    height: 5px;
+    /* 15px left 15px right */
+    width: calc(100% - 30px);
+  }
+  .features .box p {
+    line-height: 2;
+    font-size: 20px;
+    margin: 30px 0;
+    padding: 25px;
+    color: #000000;
+  }
+  .features .box a {
+    display: block;
+    border: 3px solid;
+    width: fit-content;
+    margin: 0 auto 30px;
+    /* Font Size Will Fix the thin line of the fill effect */
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 6px;
+    transition: var(--main-transition);
+  }
+  .features .quality .img-holder::before {
+    background-color: rgb(244, 64, 54 , 60%);
+  }
+  .features .quality h2::after {
+    background-color: #f44036;
+  }
+  .features .quality a {
+    color: #f44036;
+    border-color: #f44036;
+    /* For the fill effect */
+    background: linear-gradient(to right, #f44036 50%, rgb(255, 255, 255) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .features .time .img-holder::before {
+    background-color: rgb(0 150 136 / 60%);
+  }
+  .features .time h2::after {
+    background-color: #009688;
+  }
+  .features .time a {
+    color: #009688;
+    border-color: #009688;
+    /* For the fill effect */
+    background: linear-gradient(to right, #009688 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .features .passion .img-holder::before {
+    background-color: rgb(3 169 244 / 60%);
+  }
+  .features .passion h2::after {
+    background-color: #03a9f4;
+  }
+  .features .passion a {
+    color: #03a9f4;
+    border-color: #03a9f4;
+    /* For the fill effect */
+    background: linear-gradient(to right, #03a9f4 50%, rgb(255, 255, 255) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .features .box:hover a {
+    background-position: left bottom;
+    color: white;
+  }
+/* End Deparment */
+/* Start Contact us Section */
+  .discount {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .discount .image {
+    background-image: url(../Imgs/discount-background1.jpg);
+    background-size: cover;
+    color: white;
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    animation: change-background 10s linear infinite;
+  }
+  @keyframes change-background {
+    0%,100% {
+      background-image: url(../Imgs/discount-background1.jpg);
+    }
+    50% {
+      background-image: url(../Imgs/discount-background2.jpg);
+    }
+  }
+  .discount .image::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(19, 99, 50, 0.97);
+    z-index: -1;
+  }
+  @media (max-width:991px) {
+    .discount .image {
+      flex-basis: 100%;
+      padding-bottom: 10px;
+    }
+  }
+  .discount .form {
+    display: flex;
+    /* Align Items will center the inputs with their display block and width 100% */
+    align-items: center;
+    justify-content: center;
+    flex-basis: 50%;
+  }
+  @media (max-width:991px) {
+    .discount .form {
+      flex-basis: 100%;
+      padding-bottom: 25px;
+    }
+  }
+  .discount .form .input {
+    display: block;
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    caret-color: var(--font-color);
+  }
+  .discount .form .textarea.input {
+    /* To disable the resize of textarea */
+    resize: none;
+    height: 200px;
+  }
+  .discount .form .input:focus {
+    outline: none;
+  }
+  .discount .form [type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--font-color);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: var(--main-transition);
+  }
+  .discount .form [type="submit"]:hover {
+    background-color:rgba(19, 99, 50, 0.97);
+  }
+  .discount .content {
+    text-align: center;
+    padding: 0 20px;
+  }
+  .discount .content h2 {
+    font-size: 40px;
+    margin: 25px auto;
+    letter-spacing: -2px;
+  }
+  .discount .content p {
+    line-height: 1.6;
+    font-size: 18px;
+    max-width: 500px;
+  }
+  .discount .content img {
+    width: 300px;
+    max-width: 100%;
+  }
+/* End  us Section */
+/* Start Footer Section */
+  .footer {
+    background-color: #080808;
+    padding: 70px 0 0;
+  }
+  @media (max-width: 767px) {
+    .footer {
+      text-align: center;
+    }
+  }
+  .footer .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 30px;
+  }
+  .footer .box h3 {
+    color: white;
+    font-size: 50px;
+    margin: 0 0 20px;
+  }
+  .footer .box .social {
+    display: flex;
+  }
+  @media (max-width: 767px) {
+    .footer .box .social {
+      justify-content: center;
+    }
+  }
+  .footer .box .social li {
+    margin-right: 10px;
+  }
+  .footer .box .social li a {
+    background-color: #3995b1;
+    color: #ffffff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    transition: var(--main-transition);
+  }
+  .footer .box .social .facebook:hover {
+    background-color: #1877f2;
+  }
+  .footer .box .social .twitter:hover {
+    background-color: #1da1f2;
+  }
+  .footer .box .social .youtube:hover {
+    background-color: #ff0000;
+  }
+  .footer .box .text {
+    line-height: 2;
+    color: #b9b9b9;
+  }
+  .footer .box .links li {
+    /* You can do it on a directly make it block and add padding left */
+    padding: 15px 0;
+    transition: var(--main-transition);
+  }
+  .footer .box .links li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+  .footer .box .links li:hover {
+    padding-left: 10px;
+  }
+  .footer .box .links li:hover a {
+    color: white;
+  }
+  .footer .box .links li a {
+    color: #b9b9b9;
+    transition: var(--main-transition);
+  }
+  .footer .box .links li a::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\F101";
+    font-weight: 900;
+    margin-right: 10px;
+    color: var(--font-color);
+  }
+  .footer .box .line {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    margin-bottom: 30px;
+  }
+  @media (max-width: 767px) {
+    .footer .box .line {
+      flex-direction: column;
+    }
+  }
+  .footer .box .line i {
+    font-size: 25px;
+    color: var(--font-color);
+    margin-right: 10px;
+  }
+  @media (max-width: 767px) {
+    .footer .box .line i {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+  .footer .box .line .info {
+    line-height: 1.7;
+    flex: 1;
+  }
+  .footer .box .line .info span {
+    display: block;
+  }
+  .footer .footer-gallery img {
+    width: 78px;
+    border: 3px solid rgb(255, 255, 255);
+    margin: 2px;
+  }
+  .footer .copyright {
+    padding: 25px 0;
+    text-align: center;
+    color: white;
+    margin: 50px 0 0;
+    border-top: 1px solid #e9f541;
+  }
+
+  .article-card a:link{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #394FE1 !important;
+    text-decoration: none;
+}
+
+.article-card a:visited{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #394FE1 !important;
+    text-decoration: none;
+}
+
+.article-card a:hover{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #394FE1 !important;
+    text-decoration: underline;
+}
+
+.article-card a:active{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #394FE1 !important;
+    text-decoration: underline;
+}
+.article-card{
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 6%;
+  box-shadow: 0 5px 6px 5px rgba(0,0,0,.04);
+  margin-top: 12%;
+  margin-bottom: 15%;
+}
+
+.article-card h4{
+  font-family: 'Inter', sans-serif;
+  color: #010038 !important;
+  font-weight: 600;
+  font-size: 200%;
+}
+
+.article-card img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+.readingtime{
+  text-align: right;
+}
+body {
+  font-family: 'Cairo', sans-serif;
+}
+
+.footer {
+  background-color: #f4f4f4;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-box {
+  margin-bottom: 20px;
+}
+
+.footer h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.footer .social {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer .social li {
+  margin: 0 10px;
+}
+
+.footer .social a {
+  color: #010038;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.footer .text {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0 0;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .footer .social {
+      flex-direction: column;
+  }
+
+  .footer .social li {
+      margin: 10px 0;
+  }
+}
+
+/* End Footer Section */
