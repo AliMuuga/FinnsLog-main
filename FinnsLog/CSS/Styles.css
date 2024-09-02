@@ -50,6 +50,34 @@
       width: 1170px;
     }
   }
+  
+  .social {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.social li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  border-radius: 50%;
+  background-color: #333; /* Adjust background color */
+  color: #fff;
+  text-align: center;
+  font-size: 20px; /* Adjust font size as needed */
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.social li a:hover {
+  background-color: #555; /* Adjust hover color */
+}
+
 /* Global Rules End */
 /* Components Start */
 .main-title {
@@ -427,7 +455,7 @@
   overflow: hidden;
   transition: transform var(--main-transition), box-shadow var(--main-transition);
   width: 345px; /* Fixed width */
-  height: 700.3px; /* Fixed height */
+  height: 712.3px; /* Fixed height */
 }
 .articles .box:hover {
   transform: translateY(-10px);
@@ -436,13 +464,13 @@
 .articles .box img {
   max-width: 100%;
   width: 345px; /* Fixed width */
-  height: 460px; /* Fixed height */
+  height: 440px; /* Fixed height */
   object-fit: cover; /* Ensures the image fits within the dimensions */
 }
 .articles .box .text {
-  padding: 20px;
+  padding: 22px;
   width: 345px; /* Fixed width */
-  height: 191.52px; /* Fixed height */
+  height: 192.52px; /* Fixed height */
   box-sizing: border-box; /* Ensures padding is included in the width and height */
 }
 .articles .box .text h3 {
@@ -460,7 +488,7 @@
   justify-content: space-between;
   align-items: center;
   width: 345px; /* Fixed width */
-  height: 60px; /* Fixed height */
+  height: 20 px; /* Fixed height */
   box-sizing: border-box; /* Ensures padding is included in the width and height */
 }
 .articles .box .info a {
@@ -514,7 +542,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    border-style: solid;
+    border-style: solid; 
     border-width: 0 0 170px 500px ;
     border-color: transparent transparent #ffffff transparent;
     transition: var(--main-transition);
